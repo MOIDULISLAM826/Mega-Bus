@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+
+    <main class="main-content container">
+
+        <div class="booking-content">
+            <h1>Mega City Bus</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.</p>
+        </div>
+
+
+        <div class="booking-form">
+            <h3>Explore By Bus</h3>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">From</label>
+                        <input class="inp-style" type="text" name="" placeholder="Dhaka">
+                </div>
+                <div class="input-group">
+                    <label" for="">From</label>
+                        <input class="inp-style" type="text" name="" placeholder="Chittagone">
+                </div>
+            </div>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">First Class ($150)</label>
+                        <input id="first-class-count" class="inp-style inp-width" type="number" name="" value="0">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <p> <span onclick="handlePeopleChange('first-class', true) ">+</span> <span onclick="handlePeopleChange('first-class', false)">-</span> </p>
+                    </div>
+
+                </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Economy ($100)</label>
+                        <input id="economy-count" class="inp-style inp-width" type="number" name="" value="0">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <p> <span onclick="handlePeopleChange ('economy', true)">+</span> 
+                            <span onclick="handlePeopleChange('economy', false)">-</span> </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="total-price">$00</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="tax-amount">$00</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$00</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <script>
+            function handlePeopleChange(people, isIncrease){
+            const peopleInput = document.getElementById(people +'-count');
+            const peopleCount = parseInt(peopleInput.value);
+            let peopleNewCount = peopleCount;
+            if(isIncrease == true){
+               peopleNewCount = peopleCount +1;
+            }
+            if(isIncrease == false && peopleCount > 0){
+                peopleNewCount = peopleCount - 1;
+            }
+            peopleInput.value = peopleNewCount;
+            let peopleTotal = 0;
+            if(people == 'first-class'){
+               peopleTotal = peopleNewCount * 150;
+            }
+            if(people == 'economy'){
+               peopleTotal = peopleNewCount * 100;
+            }
+            calculateTotal();  
+
+         };
+
+         function calculateTotal(){
+            const firstClassInput = document.getElementById('first-class-count');
+            const firstClassCount = parseInt(firstClassInput.value);
+
+            const economyInput = document.getElementById('economy-count');
+            const economyCount = parseInt(economyInput.value);
+
+            const totalPrice = firstClassCount * 150 + economyCount * 100;
+            document.getElementById('total-price').innerText = '$' + totalPrice;
+
+            const tax = Math.round(totalPrice * 0.1);
+            document.getElementById('tax-amount').innerText='$' + tax;
+
+            const grandTotal = totalPrice + tax;
+            document.getElementById('grand-total').innerText= '$' + grandTotal;
+         };
+        </script>
+    </main>
+
+    <!--Thank You-->
+</body>
+
+</html>
